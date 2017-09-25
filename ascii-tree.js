@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
 var freetree = require('freetree');
-var c0 = String.fromCharCode(9500);
-var c1 = String.fromCharCode(9472);
-var c2 = String.fromCharCode(9492);
-var c3 = String.fromCharCode(9474);
+//var c0 = String.fromCharCode(9500); // ├
+//var c1 = String.fromCharCode(9472); // ─
+//var c2 = String.fromCharCode(9492); // └
+//var c3 = String.fromCharCode(9474); // │
+
+var c0 = "+";
+var c1 = "-";
+var c2 = "+";
+var c3 = "|";
 
 function generate(str) {
     var levels = [];
@@ -20,7 +25,7 @@ function compose(tree, end, levels) {
     var c = end ? c2 : c0;
 
     if (tree.level == 0) {
-        return tree.value;
+        return tree.value.trim();
     }
 
     for (i = 1; i < tree.level; ++i) {
@@ -28,7 +33,7 @@ function compose(tree, end, levels) {
         ret += '  ';
     }
 
-    return ret + c + c1 + ' ' + tree.value;
+    return ret + c + c1 + ' ' + tree.value.trim();
 }
 
 function _generate(tree, end, levels) {
